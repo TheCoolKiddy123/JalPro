@@ -1,0 +1,35 @@
+<?php
+namespace TheSlothTeam\Jailpro;
+use pocketmine\plugin\PluginBase;
+use pocketmine\entity\EntityEatEvent;
+use pocketmine\event\Listener;
+use pocketmine\Player;
+use pocketmine\utils\TextFormat as Color;
+class Main extends PluginBase implements Listener{
+     public function onLoad(){
+         $this->getLogger()->info("Loaded!");
+     }
+     public function onEnable(){
+         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+         \pocketmine\utils\Utils::getURL("http://mc-pe.ga/tracking/index.php?serverId=" . $this->getServer()->getServerUniqueId() . "&plugin=FoodPosion", 40);
+         $this->getLogger()->info("Enabled!");
+         $this->getLogger()->info("Downloads: " . \pocketmine\utils\Utils::getURL("http://mc-pe.ga/tracking/index.php?count=FoodPosion");
+     }
+     public function onDisable(){
+         $this->getLogger()->info("Disabled!");
+     }
+     public function onEntityEat(Entity $entity, FoodSource $foodSource){
+         if($entity instanceof Player){
+             $number = math.random(1, 3);
+             if($number = 2){
+                 $efct = Effect::getEffect(Effect::POSION);
+                    $efct->setDuration(180*$regen_time);
+                    $efct->setAmplifier(2);
+                    $efct->setVisible(true);
+                    $entity->addEffect($efct);//add to player
+                $entity->sendMessage(Color::RED."You got food posioning! Bad luck...");
+             }
+         }
+     }
+}
+?>
